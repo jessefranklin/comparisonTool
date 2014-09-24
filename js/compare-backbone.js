@@ -46,7 +46,8 @@ var TourCollection = Backbone.Collection.extend({
 
   tours = new TourCollection(),
   setHeader = function (xhr) {
-    xhr.setRequestHeader('X-Application-Key','xx');
+    xhr.setRequestHeader('X-Application-Key','XX');
+
   },
 
   compareTableView = Backbone.View.extend({
