@@ -1,0 +1,266 @@
+/**
+ * comparison_tool/compare.scss
+ * 
+ * Styling for a Trip with context coming from solr
+ *
+ * Requires: faceted_trips_pjax/css/variables.scss
+ */
+@import "gadventures/css/variables.scss";
+@import "gadventures/css/region_variables.scss";
+@import "faceted_trips_pjax/css/variables.scss";
+@import "gadventures/css/mixins.scss";
+
+.comparison-bind {
+    padding: 2px 8px;
+
+    background: $tripTileYellow;
+    margin: 2px 0 0;
+    display: inline-block;
+    float: right;
+    label {
+        font-size: 9px; 
+        text-transform: uppercase;
+        display: inline-block;
+        float: right;
+        vertical-align: top;
+        line-height: 1.7em;
+        margin: 2px 0;
+        input {
+            margin-left: 4px;
+            margin-top: 0px;
+            vertical-align: top;
+        }
+    }
+}
+
+.trip-tag {
+    margin-left: 5px;
+}
+
+.comparison-prompt {
+    position: fixed;
+
+    @include transition(bottom, .4s, ease-in-out);
+    bottom: -120px;
+    padding: 0px;
+    right: 0px;
+    width: 260px;
+    background: rgba(white, 1);
+    border: 1px solid #666;
+    z-index: 99;
+    p {
+        font-size: 12px;
+        line-height: 1.4em;
+        margin: 0px;
+    }
+    &.active {
+        @include transition(bottom, .4s, ease-in-out); 
+        bottom: -4px;
+    }
+    .compare {
+        .compare-header {
+            width: 238px;
+            background: rgba(#666, 1);
+            color: #fff;
+            font-size: 12px;
+            padding: 3px 7px 5px 15px;
+            .btn-container {
+                float: right;
+            }
+            .tournum {
+                font-weight: bold;
+            }
+        } 
+        .compare-body {
+            padding: 15px;
+            height: 35px;
+        }
+    }
+}
+
+.btn-compare {
+    @include transition(background, .4s, ease-in-out); 
+    background: $greenLime;
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 11px;
+    &:hover {
+        @include transition(background, .4s, ease-in-out); 
+        background: darken($greenLime, 10%);
+        color: white;
+    }
+}
+
+
+
+.fixed {
+    position: fixed !important;   
+}
+
+.reset-compare {
+    font-size: 11px;
+    color: #ccc;
+    margin-right: 7px;
+    cursor: pointer;
+}
+
+.compare-overlay {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    z-index: 9999;
+    padding: 30px;
+    background: rgba(white, .98);
+    .compare-overlay-scrollable {
+        overflow-x: scroll;
+        height: 100%;
+        margin-bottom: 20px;
+    }
+    .btnClose {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #666;
+        cursor: pointer;
+    }
+    h2 {
+        font-family: 'helvetica neue', arial, sans-serif;
+        font-size: 30px;
+        font-weight: 100px;
+        margin: 0px 0 20px;
+        line-height: 1em;
+
+    }
+    h4 {
+        margin: 0px 0 10px;
+        padding: 0px;
+        font-size: 16px;
+        font-family: 'helvetica neue', arial, sans-serif;
+    }
+    .table {
+        margin-bottom: 30px;
+        display: inline-block;
+    }
+    .physical-grade {
+        border-radius: 15px;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        background: rgba(#ccc, 1);
+        padding: 5px;
+        display: block;
+        margin: 0 auto;
+        font-size: 17px;
+        font-weight: 200;
+        line-height: 1.1em;
+    }
+    .price-block {
+        color: #fff;
+        .price {
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: .02em;
+        }
+        .currency {
+            font-weight: 200;
+            letter-spacing: .02em;
+            font-size: 11px;
+            margin-left: 4px;
+        }
+    }
+    .duration {
+        color: #fff;
+        font-weight: 200;
+        letter-spacing: .02em;
+        font-size: 14px;
+    }
+    td {
+        font-size: 12px;
+        line-height: 1.2em;
+        border-top: none;
+        min-width: 200px;
+        &:first-child {
+            font-weight: bold;
+            width: 80px !important;
+            max-width: 80px !important;
+            padding-right: 20px;
+
+        }
+        .btn {
+            width: 90%;
+            margin: 0 auto 10px;
+        }
+    }
+    tr {  
+        &:first-child {
+            td {
+                
+                background: #63686c;
+                color: #cbd2d8 !important;
+                h4 {
+                    color: #cbd2d8;
+                    font-size: 14px;
+                }
+                &:nth-child(even) {
+                    background: #717a81;
+                }
+            }
+
+        }
+        td { 
+            padding: 10px;
+            width: 200px;
+            border-bottom: 1px solid #ccc;
+            &:first-child {
+                color: #839099;
+                text-transform: uppercase;
+                font-size: 12px;
+            }
+            &:nth-child(even) {
+                background: #f4f5f7;
+            }
+        }
+    }
+    tr:nth-child(-n+4) {
+        td {
+            text-align: center;
+            &:first-child {
+                text-align: left;
+            }
+        }
+    }
+    tr:nth-child(9) {
+        td {
+            border-bottom: none !important;
+        }
+    }
+    
+    @media screen and (max-width:769px) {
+        padding: 5px;
+        td { 
+            &:first-child {
+                background: #fff;
+                max-width: 120px!important;
+                min-width: 120px;
+                width: 120px;
+                
+                height: 100%;
+            }
+            padding: 10px;
+            width: 200px;
+            min-width: 200px;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+        .compare-overlay-scrollable {
+            overflow-x: scroll;
+            overflow-y: visible;
+            position: relative;
+        }
+
+    }
+
+
+}

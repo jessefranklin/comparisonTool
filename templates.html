@@ -1,0 +1,80 @@
+
+<script type='text/template' id="compareTableTemplate">
+<div class="compare-overlay">
+    <h2>You are comparing <%= amountSelected %> Trips</h2> <a class="closeCompare btnClose">close</a>
+    <div class="compare-overlay-scrollable">
+        <table class="table responsive" id="compareToursTable">
+            <tbody>
+                <tr>
+                    <td>Tour</td>
+                    <td>Travel Style</td>
+                    <td>Service Level</td>
+                    <td>Physical Grading</td>
+                    <td>Places Visited</td>
+                    <td>Lodgings</td>
+                    <td>Meals Included</td>
+                    <td>Meal Budget</td>
+                    <td>Included Activities</td>
+                
+                    
+                    
+                    
+                    
+                    <td></td>
+                </tr>
+                <% _.each(tours.models, function(tour) { %>
+                <tr>
+                    <td><h4><%= tour.get('name') %></h4>
+                        <p class="price-block"><span class="price">$9999</span><span class="currency">USD</span></p>
+                        <p class="duration"><%= tour.getObjVal('itineraries', 'SUMMARY').duration %> Days</p>
+                    </td>
+                    <td><%= tour.detailTypeBody('categories','category_type','Travel Style', 'name') %></td>
+                    <td><%= tour.detailTypeBody('categories','category_type','Service Level', 'name') %></td>
+                    <td><span class="physical-grade"><%= tour.detailTypeBody('categories','category_type','Physical Grading', 'name') %></span></td>
+                    <td><%= tour.visitedCountries() %></td>
+                    <td><%= tour.detailTypeBody('details','detail_type','Accommodation','body') %></td>
+                    <td><%= tour.detailTypeBody('details','detail_type','Meals Included','body') %></td>
+                    <td><%= tour.detailTypeBody('details','detail_type','Meal Budget','body') %></td>
+
+                    <td><%= tour.detailTypeBody('details','detail_type',"What's Included",'body') %></td>
+
+                    
+                    
+                    <td><a href="<%= tour.getObjVal('site_links', 'OVERVIEW').href %>" class="btn btn-default ">View this tour</a>
+                     <img src="<%= tour.getObjVal('images', 'MAP').image_href %>" width="200" height="200" />
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+</script>
+
+
+<script type='text/template' id="comparePromptTemplate" >
+    
+    <% if (amountSelected === 1){ %>
+        <div class="compare selectmore">
+        <div class="compare-header">Trip Comparison (1)</div>
+        <div class="compare-body">
+            <p>Please select more than one tour to use our compare feature.</p>
+        </div>
+        </div>
+    <% } else if (amountSelected >= 2 && amountSelected <= 5) { %>
+        <div class="compare ">
+            <div class="compare-header">
+                <span class="tournum">Trip Comparison (<%= amountSelected %>)</span>
+                <span class="btn-container"><a class="reset-compare">Reset</a> <a class="btn-compare btn" id="btn-compare">Compare</a></span>
+            </div>
+            <div class="compare-body">
+                <p>Compare up to 5 tours</p>
+            </div>
+        </div>
+    <% } else if (amountSelected >= 5) { %>
+        <div class="compare ">
+            <p><span class="tournum"><%= amountSelected %></span> Tours selected</p><p>Please compare only up to 5 tours</p>
+            <a class="unselectAll">Unselect All</a>
+        </div>
+    <% } %>
+</script>
